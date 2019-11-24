@@ -1,0 +1,89 @@
+  <% if @newbook.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @newbook.errors.count %>件のエラーが発生しました。</h2>
+      <ul>
+      <% @newbook.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3" >
+        <h2>User info</h2>
+          <table class='table'>
+            <tr><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg" %></tr>
+            <tr>
+              <th>name</th>
+              <th><%= @user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th><%= @user.introduction %></th>
+            </tr>
+          </table>
+
+        <div class='row'>
+          <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/<%= @user.id %>/edit"></a>
+        </div>
+
+        <h2>New book</h2>
+            <%= form_for(@newbook) do |f| %>
+
+                <h4>Title</h4>
+                <%= f.text_field :title %>
+
+                <h4>Option</h4>
+                <%= f.text_area :body %>
+
+                <%= f.submit 'Create Book' %>
+
+            <% end %>
+      </div>
+
+
+    <div class="col-lg-9">
+    <h2>Books</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Option</th>
+          <thcolspan="3"></thcolspan="3">
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td>
+              <%= link_to user_path(book.user) do %>
+              <%= attachment_image_tag book.user, :profile_image, :fill, 40, 40, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:'40x40' %>
+              <% end %>
+            </td>
+            <td><%= link_to book.title, book_path(book) %></td>
+            <td><%= book.body %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  </div>
+
+
+  <footer>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-xs-3 col-xs-offset-9'>
+        <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
+    </div>
+  </footer>
