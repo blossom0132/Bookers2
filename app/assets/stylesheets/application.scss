@@ -15,3 +15,15 @@
  */
     @import "bootstrap-sprockets";
     @import "bootstrap";
+
+    .field {
+    margin : 10px 0;
+    }
+    .main {
+    margin-top : 60px;
+    }
+    .notice {
+    margin-top : 0px;
+    margin-left : 110px;
+    color : green;
+    }

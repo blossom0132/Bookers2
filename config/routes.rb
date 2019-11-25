@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'homes/index'
   # get 'homes/about'
   get 'home/about' => 'homes#about'
